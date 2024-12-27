@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Security Scanner Dashboard</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --danger-color: #dc2626;
+            --success-color: #16a34a;
+            --warning-color: #d97706;
+            --info-color: #2563eb;
+            --background-color: #f8fafc;
+            --card-background: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .scan-controls {
+            display: flex;
+            gap: 1rem;
+            background: var(--card-background);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            transition: border-color var(--transition-speed);
+        }
+
+        .button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 120px;
+            justify-content: center;
+        }
+
+        .button-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .button-secondary {
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .tab {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all var(--transition-speed);
+        }
+
+        .tab.active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .panel {
+            display: none;
+            background: var(--card-background);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        .vulnerability-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .vulnerability-item {
+            background: var(--card-background);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .vulnerability-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .severity-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: var(--card-background);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 0.375rem;
+            margin-bottom: 1rem;
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            .scan-controls {
+                flex-direction: column;
+            }
+            .button {
+                width: 100%;
+            }
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="dashboard-header">
+            <h1 class="title">Security Scanner Dashboard</h1>
+            <div id="scanStatus"></div>
+        </div>
+
+        <div class="scan-controls">
+            <div class="input-group">
+                <input type="text" id="urlInput" class="input" placeholder="Enter website URL (e.g., https://example.com)" />
+            </div>
+            <button id="scanButton" class="button button-primary">Start Scan</button>
+        </div>
+
+        <div id="resultsTabs" class="tabs">
+            <div class="tab active" data-tab="overview">Overview</div>
+            <div class="tab" data-tab="vulnerabilities">Vulnerabilities</div>
+            <div class="tab" data-tab="reports">Reports</div>
+        </div>
+
+        <div id="overviewPanel" class="panel active">
+            <div id="metricsGrid" class="metrics-grid"></div>
+        </div>
+
+        <div id="vulnerabilitiesPanel" class="panel">
+            <div id="vulnerabilityList" class="vulnerability-list"></div>
+        </div>
+
+        <div id="reportsPanel" class="panel">
+            <div id="downloadSection" class="download-section"></div>
+        </div>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script>
+        class SecurityDashboard {
+            constructor() {
+                this.scanning = false;
+                this.currentScanId = null;
+                this.initializeElements();
+                this.attachEventListeners();
+                this.apiBaseUrl = 'http://localhost:5000';
+            }
+
+            initializeElements() {
+                this.urlInput = document.getElementById('urlInput');
+                this.scanButton = document.getElementById('scanButton');
+                this.metricsGrid = document.getElementById('metricsGrid');
+                this.vulnerabilityList = document.getElementById('vulnerabilityList');
+                this.downloadSection = document.getElementById('downloadSection');
+                this.loadingOverlay = document.getElementById('loadingOverlay');
+                this.scanStatus = document.getElementById('scanStatus');
+            }
+
+            attachEventListeners() {
+                this.scanButton.addEventListener('click', () => this.startScan());
+                
+                document.querySelectorAll('.tab').forEach(tab => {
+                    tab.addEventListener('click', (e) => this.switchTab(e.target.dataset.tab));
+                });
+
+                this.urlInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.startScan();
+                });
+            }
+
+            switchTab(tabId) {
+                document.querySelectorAll('.tab').forEach(tab => {
+                    tab.classList.toggle('active', tab.dataset.tab === tabId);
+                });
+                document.querySelectorAll('.panel').forEach(panel => {
+                    panel.classList.toggle('active', panel.id === `${tabId}Panel`);
+                });
+            }
+
+            showLoading(show) {
+                this.loadingOverlay.style.display = show ? 'flex' : 'none';
+                this.scanButton.disabled = show;
+                this.scanButton.textContent = show ? 'Scanning...' : 'Start Scan';
+            }
+
+            async startScan() {
+                const url = this.urlInput.value.trim();
+                if (!url) {
+                    this.showError('Please enter a valid URL');
+                    return;
+                }
+
+                try {
+                    this.showLoading(true);
+                    const response = await fetch(`${this.apiBaseUrl}/api/scan`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ url: url })
+                    });
+
+                    let data;
+                    try {
+                        data = await response.json();
+                    } catch (parseError) {
+                        throw new Error('Invalid response from server: Failed to parse JSON');
+                    }
+                    
+                    if (!response.ok) {
+                        throw new Error(data.error || 'Scan failed');
+                    }
+                    
+                    if (data.status === 'error') {
+                        throw new Error(data.error || 'Scan failed');
+                    }
+                    
+                    if (!data.results) {
+                        throw new Error('No scan results received');
+                    }
+                    
+                    this.updateDashboard(data.results);
+                    
+                } catch (error) {
+                    this.showError(`Failed to complete scan: ${error.message}`);
+                    console.error('Scan error:', error);
+                } finally {
+                    this.showLoading(false);
+                }
+            }
+
+            updateDashboard(results) {
+                this.updateMetrics(results);
+                this.updateVulnerabilities(results.vulnerabilities || []);
+                if (results.report_path) {
+                    this.updateReportsSection(results.report_path);
+                }
+                this.scanStatus.textContent = `Last scan: ${new Date().toLocaleString()}`;
+            }
+
+            updateMetrics(results) {
+                const vulnerability_count = results.vulnerabilities ? results.vulnerabilities.length : 0;
+                this.metricsGrid.innerHTML = `
+                    <div class="metric-card">
+                        <h3>Risk Level</h3>
+                        <p class="metric-value">${results.risk_level}</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Vulnerabilities Found</h3>
+                        <p class="metric-value">${vulnerability_count}</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Scan Duration</h3>
+                        <p class="metric-value">${results.scan_duration.toFixed(2)}s</p>
+                    </div>
+                `;
+            }
+
+            updateVulnerabilities(vulnerabilities) {
+                this.vulnerabilityList.innerHTML = vulnerabilities.map(vuln => `
+                    <div class="vulnerability-item">
+                        <div class="vulnerability-header">
+                            <h3>${vuln.type}</h3>
+                            <span class="severity-badge" style="background-color: ${this.getSeverityColor(vuln.severity)}">
+                                ${vuln.severity}
+                            </span>
+                        </div>
+                        <p>${vuln.description}</p>
+                        ${vuln.technical_details ? `
+                            <div class="technical-details">
+                                <strong>Technical Details:</strong>
+                                ${vuln.technical_details}
+                            </div>
+                        ` : ''}
+                        ${vuln.remediation ? `
+                            <div class="remediation">
+                                <strong>Remediation:</strong>
+                                <p>${vuln.remediation}</p>
+                            </div>
+                        ` : ''}
+                    </div>
+                `).join('');
+            }
+
+            updateReportsSection(reportPath) {
+                const filename = reportPath.split('/').pop();
+                this.downloadSection.innerHTML = `
+                    <button class="button button-secondary" onclick="window.location.href='${this.apiBaseUrl}/api/report/${filename}'">
+                        Download PDF Report
+                    </button>
+                `;
+            }
+
+            getSeverityColor(severity) {
+                const colors = {
+                    'Critical': '#fee2e2',
+                    'High': '#ffedd5',
+                    'Medium': '#fef3c7',
+                    'Low': '#dbeafe'
+                };
+                return colors[severity] || '#f3f4f6';
+            }
+
+            showError(message) {
+                const alert = document.createElement('div');
+                alert.className = 'alert';
+                alert.textContent = message;
+                this.scanStatus.innerHTML = '';
+                this.scanStatus.appendChild(alert);
+                setTimeout(() => alert.remove(), 5000);
+            }
+        }
+
+        // Initialize dashboard when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.securityDashboard = new SecurityDashboard();
+        });
+    </script>
+</body>
+</html>

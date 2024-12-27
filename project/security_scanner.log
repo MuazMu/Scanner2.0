@@ -1,0 +1,104 @@
+2024-12-24 21:31:06,676 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-12-24 21:31:06,676 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-12-24 21:32:03,616 - werkzeug - INFO - 127.0.0.1 - - [24/Dec/2024 21:32:03] "OPTIONS /api/scan HTTP/1.1" 200 -
+2024-12-24 21:32:03,871 - app - ERROR - Exception on /api/scan [POST]
+Traceback (most recent call last):
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask_cors\extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask\app.py", line 976, in ensure_sync
+    return self.async_to_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask\app.py", line 997, in async_to_sync
+    raise RuntimeError(
+RuntimeError: Install Flask with the 'async' extra in order to use async views.
+2024-12-24 21:32:03,873 - werkzeug - INFO - 127.0.0.1 - - [24/Dec/2024 21:32:03] "[35m[1mPOST /api/scan HTTP/1.1[0m" 500 -
+2024-12-24 21:32:10,175 - werkzeug - INFO - 127.0.0.1 - - [24/Dec/2024 21:32:10] "OPTIONS /api/scan HTTP/1.1" 200 -
+2024-12-24 21:32:10,486 - app - ERROR - Exception on /api/scan [POST]
+Traceback (most recent call last):
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask_cors\extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask\app.py", line 976, in ensure_sync
+    return self.async_to_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask\app.py", line 997, in async_to_sync
+    raise RuntimeError(
+RuntimeError: Install Flask with the 'async' extra in order to use async views.
+2024-12-24 21:32:10,487 - werkzeug - INFO - 127.0.0.1 - - [24/Dec/2024 21:32:10] "[35m[1mPOST /api/scan HTTP/1.1[0m" 500 -
+2024-12-24 21:32:33,619 - werkzeug - INFO - 127.0.0.1 - - [24/Dec/2024 21:32:33] "OPTIONS /api/scan HTTP/1.1" 200 -
+2024-12-24 21:32:33,925 - app - ERROR - Exception on /api/scan [POST]
+Traceback (most recent call last):
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask_cors\extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask\app.py", line 976, in ensure_sync
+    return self.async_to_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\muwi1\OneDrive\Desktop\Scanner2.0\venv\Lib\site-packages\flask\app.py", line 997, in async_to_sync
+    raise RuntimeError(
+RuntimeError: Install Flask with the 'async' extra in order to use async views.
+2024-12-24 21:32:33,925 - werkzeug - INFO - 127.0.0.1 - - [24/Dec/2024 21:32:33] "[35m[1mPOST /api/scan HTTP/1.1[0m" 500 -
+2024-12-24 21:55:01,377 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-12-24 21:55:01,377 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-12-24 21:55:23,307 - werkzeug - INFO - 127.0.0.1 - - [24/Dec/2024 21:55:23] "[33mGET / HTTP/1.1[0m" 404 -
+2024-12-24 21:55:33,857 - werkzeug - INFO - 127.0.0.1 - - [24/Dec/2024 21:55:33] "[33mGET / HTTP/1.1[0m" 404 -
+2024-12-24 21:55:41,764 - werkzeug - INFO - 127.0.0.1 - - [24/Dec/2024 21:55:41] "[33mGET / HTTP/1.1[0m" 404 -
+2024-12-25 05:31:39,285 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-12-25 05:31:39,285 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-12-25 05:31:46,875 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2024 05:31:46] "OPTIONS /api/scan HTTP/1.1" 200 -
+2024-12-25 05:32:33,106 - __main__ - ERROR - Error in vulnerability scan: argument of type 'ClientSession' is not iterable
+2024-12-25 05:32:33,685 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2024 05:32:33] "POST /api/scan HTTP/1.1" 200 -
+2024-12-25 05:32:47,374 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2024 05:32:47] "GET /api/report/security_report_20241225_053233.pdf HTTP/1.1" 200 -
+2024-12-25 05:33:36,577 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2024 05:33:36] "OPTIONS /api/scan HTTP/1.1" 200 -
+2024-12-25 05:33:58,628 - __main__ - ERROR - Error in vulnerability scan: argument of type 'ClientSession' is not iterable
+2024-12-25 05:33:59,238 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2024 05:33:59] "POST /api/scan HTTP/1.1" 200 -
+2024-12-25 05:42:07,953 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-12-25 05:42:07,954 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2024-12-25 05:42:16,285 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2024 05:42:16] "OPTIONS /api/scan HTTP/1.1" 200 -
+2024-12-25 05:43:08,912 - __main__ - ERROR - Error in vulnerability scan: argument of type 'ClientSession' is not iterable
+2024-12-25 05:43:09,905 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2024 05:43:09] "POST /api/scan HTTP/1.1" 200 -
+2024-12-25 05:43:20,917 - werkzeug - INFO - 127.0.0.1 - - [25/Dec/2024 05:43:20] "GET /api/report/security_report_20241225_054309.pdf HTTP/1.1" 200 -
+2024-12-25 06:07:49,491 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-12-25 06:07:49,491 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
